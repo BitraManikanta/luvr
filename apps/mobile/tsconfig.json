@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "lib": ["ES2022"],
+    "moduleResolution": "bundler",
+    "paths": {
+      "@luvora/design-system": ["../../packages/design-system/src"],
+      "@luvora/shared-types": ["../../packages/shared-types/src"]
+    }
+  },
+  "include": ["src", "assets", "app.json"],
+  "exclude": ["node_modules"]
+}
