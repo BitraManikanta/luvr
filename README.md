@@ -1,155 +1,173 @@
-# 💌 Luvora
+# 💌 Luvr
 
 **Where love lives, grows, and shines.**
 
-Luvora is a privacy-first messaging and social application for couples and the people they love.
+Luvr is a privacy-first messaging and social application for couples and the people they love.
 
-> 🚧 **Currently in active development** — Phase 1 (brand, architecture, design system, mobile MVP)
-
----
-
-## Features (Planned)
-
-- 🔒 **End-to-end encrypted** one-to-one and group messaging (Signal Protocol – Phase 4)
-- 💬 Rich messaging — emoji, stickers, GIFs, voice messages, reactions, disappearing messages
-- 🎮 **15+ couple games** playable inside chat
-- 💕 **Couple Space** — anniversaries, memories, love letters, mood check-ins, bucket lists
-- 🌸 Stories, social feed, followers, and reels
-- 🎨 **12 beautiful themes** — all free, fully customizable
-- 📞 Audio and video calls (WebRTC)
-- 🤖 Private-first AI companion (on-device + opt-in cloud)
-- 📴 **Full offline support** with encrypted outbox
-- 🔑 Secure device management with platform Keychain/Keystore integration
+> Developed by **BITRA MANIKANTA** · GitHub: [@BitraManikanta](https://github.com/BitraManikanta)
 
 ---
 
-## Monorepo Structure
+## 🌐 Live Website
+
+**Public URL:** Deploy via Vercel → connect `BitraManikanta/luvr` (private repo, public site).
+
+See [docs/deployment.md](docs/deployment.md) for step-by-step instructions.
+
+---
+
+## ✨ Features
+
+| Feature | Status |
+|---------|--------|
+| 🌸 Beautiful landing website | ✅ Live |
+| 💌 Waitlist signup | ✅ Live |
+| 🔒 End-to-end encrypted messaging (Signal Protocol) | 🔧 Phase 4 |
+| 💬 Rich messaging (emoji, stickers, GIFs, voice) | 🔧 Phase 3+ |
+| 🎮 15+ couple games inside chat | 🔧 Phase 6 |
+| 💕 Couple Space (anniversaries, memories, letters) | 🔧 Phase 6 |
+| 🌸 Stories, social feed & reels | 🔧 Phase 7–8 |
+| 🎨 12 free beautiful themes | ✅ Design system ready |
+| 📞 Audio & video calls (WebRTC) | 🔧 Phase 10 |
+| 🤖 Private AI companion | 🔧 Phase 9 |
+| 📴 Offline messaging with auto-retry | ✅ Architecture ready |
+| 🔑 Device key management | ✅ API scaffold ready |
+
+---
+
+## 🏗 Repository Structure
 
 ```
-luvora/
+luvr/
 ├── apps/
 │   ├── mobile/       React Native + Expo (iOS & Android)
-│   ├── web/          Next.js public website
-│   └── api/          NestJS backend
+│   ├── web/          Next.js public website (Vercel)
+│   └── api/          NestJS backend (Node.js + PostgreSQL)
 ├── packages/
-│   ├── shared-types/         TypeScript types
-│   ├── design-system/        Theme engine + components
-│   ├── contracts/            API schemas (Zod)
-│   ├── cryptography-adapter/ E2E encryption (Phase 4)
-│   └── test-fixtures/        Test helpers
+│   ├── shared-types/          TypeScript types
+│   ├── design-system/         Theme engine + 12 themes
+│   ├── cryptography-adapter/  E2E encryption (Signal Protocol)
+│   └── ...
 ├── infrastructure/
-│   ├── docker-compose.yml    Local dev services
-│   └── database/             Migrations + seeds
+│   └── docker-compose.yml     Local dev: PostgreSQL, Redis, MinIO
 └── docs/
     ├── architecture.md
     ├── threat-model.md
-    └── privacy-model.md
+    ├── privacy-model.md
+    └── deployment.md
 ```
 
 ---
 
-## Development Setup
+## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js 20+
-- Yarn 4 (Corepack)
-- Docker Desktop (for PostgreSQL, Redis, MinIO)
-- Expo Go or a physical device for mobile development
+- Yarn 4 (`corepack enable`)
+- Docker Desktop
 
 ### 1. Install dependencies
-
 ```bash
-corepack enable
 yarn install
 ```
 
-### 2. Start local services
-
+### 2. Start local services (database, cache, storage)
 ```bash
 docker compose -f infrastructure/docker-compose.yml up -d
 ```
 
-This starts:
-- PostgreSQL on port 5432
-- Redis on port 6379
-- MinIO (S3-compatible) on ports 9000/9001
-
-### 3. Configure the API
-
+### 3. Configure API environment
 ```bash
 cd apps/api
 cp .env.example .env.local
-# Edit .env.local and set strong JWT secrets
+# Edit .env.local — set strong JWT_SECRET and JWT_REFRESH_SECRET values
 ```
 
 ### 4. Start the API
-
 ```bash
-cd apps/api
-yarn start:dev
+yarn workspace @luvora/api start:dev
+# → http://localhost:3001/api/v1/health
 ```
-
-API runs at `http://localhost:3001/api/v1`  
-Health check: `http://localhost:3001/api/v1/health`
 
 ### 5. Start the website
-
 ```bash
-cd apps/web
-yarn dev
+yarn workspace @luvora/web dev
+# → http://localhost:3000
 ```
-
-Website runs at `http://localhost:3000`
 
 ### 6. Start the mobile app
-
 ```bash
-cd apps/mobile
-yarn start
+yarn workspace @luvora/mobile start
+# Press 'a' Android · 'i' iOS · scan QR with Expo Go
 ```
 
-Then press `a` for Android, `i` for iOS, or scan the QR code with Expo Go.
+---
+
+## 🔐 Environment Variables
+
+Copy `apps/api/.env.example` to `apps/api/.env.local` and fill in:
+
+| Variable | Description |
+|----------|-------------|
+| `JWT_SECRET` | Strong random string (≥ 64 chars) |
+| `JWT_REFRESH_SECRET` | Different strong random string |
+| `DB_PASSWORD` | PostgreSQL password |
+| `S3_SECRET_KEY` | MinIO / S3 secret |
+
+Generate a secret: `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"`
+
+**Never commit `.env.local` or any file with real secrets.**
 
 ---
 
-## Brand
+## 🌍 Deployment
 
-**Luvora** — from "love" + "-ora" (light/aura).  
-Pronounced: loo-VOR-ah  
-Domain: `luvora.app` (to be confirmed — see Phase 1 notes)
+The website deploys to Vercel from the private GitHub repository.
+
+The source code remains private. Only the compiled website is public.
+
+See [docs/deployment.md](docs/deployment.md) for the full guide.
 
 ---
 
-## Build Phases
+## 🔒 Security
+
+- End-to-end encryption planned via Signal Protocol (Phase 4)
+- Passwords hashed with bcrypt (cost factor 12)
+- JWT tokens with short expiry + secure refresh
+- API rate limiting with `@nestjs/throttler`
+- All secrets in environment variables only
+- See [docs/threat-model.md](docs/threat-model.md) for the full model
+
+---
+
+## 📋 Build Phases
 
 | Phase | Status | Description |
 |-------|--------|-------------|
-| 1 | 🟡 In Progress | Brand, design system, monorepo, mobile MVP scaffold |
-| 2 | ⬜ Planned | Website deployment to Vercel |
-| 3 | ⬜ Planned | Auth, database, real-time messaging |
-| 4 | ⬜ Planned | End-to-end encryption (Signal Protocol) |
-| 5 | ⬜ Planned | Offline queues + encrypted media |
-| 6 | ⬜ Planned | Theme customization + couple games |
-| 7 | ⬜ Planned | Profiles, stories, social feed |
-| 8 | ⬜ Planned | Short-form video (reels) |
-| 9 | ⬜ Planned | Hybrid AI companion |
-| 10 | ⬜ Planned | Audio + video calling |
-| 11 | ⬜ Planned | Security hardening + independent review |
-| 12 | ⬜ Planned | Domain connection + app store release |
+| 1 | ✅ | Brand, design system, monorepo scaffold |
+| 2 | ✅ | Website + Vercel deployment |
+| 3 | ✅ | Auth, database, real-time messaging |
+| 4 | 🔧 | E2E encryption (Signal Protocol) |
+| 5 | 🔧 | Offline queues + encrypted media |
+| 6 | 🔧 | Themes + couple games |
+| 7 | 🔧 | Profiles, stories, social feed |
+| 8 | 🔧 | Short-form video (reels) |
+| 9 | 🔧 | Hybrid AI companion |
+| 10 | 🔧 | Audio + video calling |
+| 11 | 🔧 | Security hardening + independent review |
+| 12 | 🔧 | Custom domain + app store release |
 
 ---
 
-## Security
+## 👨‍💻 Developer
 
-⚠️ **Phase 1 does not yet have end-to-end encryption enabled.**  
-Messages in the current development build are stored in plaintext.  
-Do not use this build for sensitive communications.
+**Developed by BITRA MANIKANTA**
 
-See [`docs/threat-model.md`](docs/threat-model.md) for the full security model.
+GitHub: [@BitraManikanta](https://github.com/BitraManikanta)
 
 ---
 
-## License
+## 📄 License
 
 Private — all rights reserved. License to be determined before public release.

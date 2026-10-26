@@ -22,7 +22,8 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-bold text-gray-900 mb-3">1. Who we are</h2>
           <p>
-            Luvora ("we", "us", "our") is a privacy-first messaging and social application.
+            Luvr ("we", "us", "our") is a privacy-first messaging and social application.
+            Developed by BITRA MANIKANTA.
             This policy describes how we collect, use, and protect your information when you
             use our mobile application and website.
           </p>

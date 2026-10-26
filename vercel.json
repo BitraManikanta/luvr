@@ -1,0 +1,7 @@
+{
+  "buildCommand": "yarn workspace @luvora/web build",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "yarn install --frozen-lockfile",
+  "framework": "nextjs",
+  "regions": ["iad1"]
+}

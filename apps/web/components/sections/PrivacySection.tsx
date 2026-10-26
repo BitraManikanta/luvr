@@ -42,7 +42,7 @@ export function PrivacySection() {
             <span className="text-gradient">it's the foundation</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Luvora is built on a reviewed end-to-end encryption protocol. Your private chats are
+            Luvr is built on a reviewed end-to-end encryption protocol. Your private chats are
             yours alone. We are honest about what we can and cannot protect.
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export function PrivacySection() {
           transition={{ delay: 0.5 }}
           className="mt-10 text-center text-sm text-gray-400 max-w-2xl mx-auto"
         >
-          Luvora's end-to-end encryption is implemented using established, reviewed cryptographic
+          Luvr's end-to-end encryption is implemented using established, reviewed cryptographic
           protocols — not homemade cryptography. An independent security review is planned before
           public launch. We make no claim of absolute security. No system is perfect.
         </motion.p>

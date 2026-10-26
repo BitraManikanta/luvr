@@ -11,7 +11,7 @@ export function FooterSection() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <span className="text-2xl" role="img" aria-label="heart letter">💌</span>
-              <span className="font-bold text-xl text-luvora-600">Luvora</span>
+              <span className="font-bold text-xl text-luvora-600">Luvr</span>
             </div>
             <p className="text-gray-400 text-sm max-w-xs">
               Where love lives, grows, and shines. A privacy-first messaging and social app.
@@ -26,7 +26,7 @@ export function FooterSection() {
                 { label: 'Features', href: '#features' },
                 { label: 'Themes', href: '#themes' },
                 { label: 'Privacy', href: '#privacy' },
-                { label: 'Waitlist', href: '#waitlist' },
+                { label: 'About', href: '/about' },
               ]}
             />
             <FooterLinkGroup
@@ -34,22 +34,29 @@ export function FooterSection() {
               links={[
                 { label: 'Privacy Policy', href: '/privacy' },
                 { label: 'Terms of Service', href: '/terms' },
-                { label: 'Cookie Policy', href: '/cookies' },
+                { label: 'Security', href: '/security' },
               ]}
             />
             <FooterLinkGroup
               title="Contact"
               links={[
-                { label: 'hello@luvora.app', href: 'mailto:hello@luvora.app' },
+                { label: 'hello@luvr.app', href: 'mailto:hello@luvr.app' },
                 { label: 'Support', href: '/support' },
-                { label: 'Security', href: '/security' },
+                { label: 'About', href: '/about' },
               ]}
             />
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-2 text-sm text-gray-400">
-          <p>© {year} Luvora. All rights reserved.</p>
+        {/* Bottom bar with attribution */}
+        <div className="mt-10 pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-gray-400">
+          <p>© {year} Luvr. All rights reserved.</p>
+          <p className="font-medium text-gray-500">
+            Developed by{' '}
+            <Link href="/about" className="text-luvora-500 hover:text-luvora-600 font-semibold">
+              BITRA MANIKANTA
+            </Link>
+          </p>
           <p>Made with 💕 for lovers everywhere.</p>
         </div>
       </div>

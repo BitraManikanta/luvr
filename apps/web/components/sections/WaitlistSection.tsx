@@ -54,7 +54,7 @@ export function WaitlistSection() {
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">
             Be the first to{' '}
-            <span className="text-gradient">experience Luvora</span>
+            <span className="text-gradient">experience Luvr</span>
           </h2>
           <p className="text-lg text-gray-500 mb-10">
             Sign up for early access. No spam, no sharing your email — just Luvora updates.

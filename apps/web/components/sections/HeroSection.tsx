@@ -66,7 +66,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10"
         >
-          Luvora is a privacy-first messaging and social app for couples and the people they love.
+          Luvr is a privacy-first messaging and social app for couples and the people they love.
           Encrypted chats, couple games, stories, AI companion, and more — all in one beautiful place.
         </motion.p>
 

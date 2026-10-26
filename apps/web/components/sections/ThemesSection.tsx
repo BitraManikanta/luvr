@@ -33,7 +33,7 @@ export function ThemesSection() {
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             Every theme is included at no cost. No theme is locked behind a paywall.
-            Customize your bubbles, backgrounds, animations, and more from Settings.
+            Customize your bubbles, backgrounds, animations, and more from Luvr Settings.
           </p>
         </motion.div>
 

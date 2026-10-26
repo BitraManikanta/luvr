@@ -93,7 +93,7 @@ export function FeaturesSection() {
             <span className="text-gradient">nothing you don't</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            One cohesive app, not a collection of unrelated features. Built for real people who
+            One cohesive app, not a collection of unrelated features. Luvr is built for real people who
             want privacy without sacrificing beauty or fun.
           </p>
         </motion.div>

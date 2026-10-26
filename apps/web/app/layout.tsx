@@ -4,39 +4,43 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
+// The metadataBase is updated to the real Vercel deployment URL.
+// Change this to your custom domain once purchased (e.g. https://luvr.com).
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://luvr-nine.vercel.app';
+
 export const metadata: Metadata = {
   title: {
-    default: 'Luvora – Where Love Lives',
-    template: '%s | Luvora',
+    default: 'Luvr – Where Love Lives',
+    template: '%s | Luvr',
   },
   description:
-    'Luvora is the privacy-first messaging and social app for couples and the people they love. End-to-end encrypted chats, couple games, stories, and more.',
-  keywords: ['messaging app', 'couples app', 'private chat', 'end-to-end encryption', 'love', 'social'],
-  authors: [{ name: 'Luvora' }],
-  creator: 'Luvora',
-  metadataBase: new URL('https://luvora.app'),
+    'Luvr is the privacy-first messaging and social app for couples. Encrypted chats, couple games, stories, shared memories, and more — all in one beautiful place.',
+  keywords: ['Luvr', 'messaging app', 'couples app', 'private chat', 'end-to-end encryption', 'love', 'social', 'romantic app'],
+  authors: [{ name: 'BITRA MANIKANTA' }],
+  creator: 'BITRA MANIKANTA',
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://luvora.app',
-    siteName: 'Luvora',
-    title: 'Luvora – Where Love Lives',
-    description: 'The privacy-first messaging and social app for couples.',
+    url: SITE_URL,
+    siteName: 'Luvr',
+    title: 'Luvr – Where Love Lives',
+    description: 'The privacy-first messaging and social app for couples. Developed by BITRA MANIKANTA.',
     images: [
       {
         url: '/og/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Luvora – Where Love Lives',
+        alt: 'Luvr – Where Love Lives',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Luvora – Where Love Lives',
+    title: 'Luvr – Where Love Lives',
     description: 'The privacy-first messaging and social app for couples.',
     images: ['/og/og-image.png'],
-    creator: '@luvoraapp',
+    creator: '@luvr_app',
   },
   icons: {
     icon: '/favicon.ico',
@@ -44,6 +48,17 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -51,6 +66,8 @@ export const viewport: Viewport = {
     { media: '(prefers-color-scheme: light)', color: '#FF85A1' },
     { media: '(prefers-color-scheme: dark)', color: '#1A0A2E' },
   ],
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

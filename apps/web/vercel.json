@@ -2,7 +2,7 @@
   "framework": "nextjs",
   "buildCommand": "cd ../.. && yarn workspace @luvora/web build",
   "outputDirectory": ".next",
-  "installCommand": "cd ../.. && yarn install",
+  "installCommand": "cd ../.. && yarn install --frozen-lockfile",
   "regions": ["iad1"],
   "headers": [
     {

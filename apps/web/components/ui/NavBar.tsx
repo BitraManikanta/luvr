@@ -23,9 +23,9 @@ export function NavBar() {
         aria-label="Main navigation"
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2" aria-label="Luvora home">
+        <Link href="/" className="flex items-center gap-2" aria-label="Luvr home">
           <span className="text-2xl" role="img" aria-label="Heart letter">💌</span>
-          <span className="font-bold text-xl text-luvora-600">Luvora</span>
+          <span className="font-bold text-xl text-luvora-600">Luvr</span>
         </Link>
 
         {/* Links */}
