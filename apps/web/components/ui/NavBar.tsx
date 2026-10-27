@@ -36,13 +36,23 @@ export function NavBar() {
           <NavLink href="#waitlist">Get Early Access</NavLink>
         </div>
 
-        {/* CTA */}
-        <Link
-          href="#waitlist"
-          className="px-4 py-2 rounded-full bg-luvora-300 text-white font-semibold text-sm hover:bg-luvora-400 transition-colors"
-        >
-          Join Waitlist
-        </Link>
+        {/* CTAs */}
+        <div className="flex items-center gap-2">
+          <a
+            href="/login"
+            className="px-4 py-2 rounded-full text-luvora-600 font-semibold text-sm
+                       hover:bg-luvora-50 transition-colors"
+          >
+            Log in
+          </a>
+          <a
+            href="/signup"
+            className="px-4 py-2 rounded-full bg-luvora-300 text-white font-semibold text-sm
+                       hover:bg-luvora-400 transition-colors"
+          >
+            Sign up free
+          </a>
+        </div>
       </nav>
     </header>
   );

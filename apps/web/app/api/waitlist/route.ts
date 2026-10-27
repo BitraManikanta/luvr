@@ -1,18 +1,15 @@
 /**
  * Waitlist signup API route.
- * In production this should store to a DB or a service like Loops / ConvertKit.
- * For now it validates the email and returns success.
+ * Persists email to the Supabase `waitlist` table (public, no auth required).
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createClient } from '../../../lib/supabase/server';
 
 const schema = z.object({
   email: z.string().email().max(255),
 });
-
-// In-memory store for development only — replace with DB in production
-const waitlistEmails = new Set<string>();
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,23 +17,26 @@ export async function POST(req: NextRequest) {
     const parsed = schema.safeParse(body);
 
     if (!parsed.success) {
-      return NextResponse.json(
-        { error: 'Invalid email address.' },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 });
     }
 
     const { email } = parsed.data;
+    const supabase = await createClient();
 
-    if (waitlistEmails.has(email)) {
-      // Idempotent — don't expose whether the email already exists
-      return NextResponse.json({ success: true });
+    const { error } = await supabase
+      .from('waitlist')
+      .insert({ email })
+      .select()
+      .maybeSingle();
+
+    if (error) {
+      // Duplicate email — treat as success (don't expose whether email exists)
+      if (error.code === '23505') {
+        return NextResponse.json({ success: true });
+      }
+      console.error('[Waitlist] Supabase error:', error.message);
+      return NextResponse.json({ error: 'Could not save. Please try again.' }, { status: 500 });
     }
-
-    waitlistEmails.add(email);
-
-    // TODO Phase 2: persist to PostgreSQL waitlist table or email service
-    console.log(`[Waitlist] New signup: ${email} (total: ${waitlistEmails.size})`);
 
     return NextResponse.json({ success: true });
   } catch {
