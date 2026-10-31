@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '../../../lib/supabase/server';
+import type { Profile } from '../../../lib/supabase/types';
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -29,11 +30,13 @@ export default async function DashboardPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/login');
 
-  const { data: profile } = await supabase
+  const { data } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .maybeSingle();
+
+  const profile = data as Profile | null;
 
   const displayName = profile?.display_name ?? user.email?.split('@')[0] ?? 'there';
   const username = profile?.username ?? '';

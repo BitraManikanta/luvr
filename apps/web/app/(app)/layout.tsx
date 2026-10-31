@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '../../lib/supabase/server';
 import { AppNavBar } from '../../components/app/AppNavBar';
+import type { Profile } from '../../lib/supabase/types';
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -10,12 +11,13 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     redirect('/login');
   }
 
-  // Fetch the user's profile
-  const { data: profile } = await supabase
+  const { data } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .maybeSingle();
+
+  const profile = data as Profile | null;
 
   return (
     <div className="min-h-screen bg-luvora-50">

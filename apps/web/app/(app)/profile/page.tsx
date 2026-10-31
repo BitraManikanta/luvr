@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { createClient } from '../../../lib/supabase/server';
 import { ProfileForm } from '../../../components/app/ProfileForm';
+import type { Profile } from '../../../lib/supabase/types';
 
 export const metadata: Metadata = {
   title: 'My Profile',
@@ -13,11 +14,13 @@ export default async function ProfilePage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/login');
 
-  const { data: profile } = await supabase
+  const { data } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .maybeSingle();
+
+  const profile = data as Profile | null;
 
   return (
     <div className="max-w-lg mx-auto space-y-6">
@@ -29,7 +32,6 @@ export default async function ProfilePage() {
       </div>
 
       <div className="bg-white rounded-3xl p-6 shadow-sm border border-luvora-100">
-        {/* Avatar placeholder */}
         <div className="flex items-center gap-4 mb-6">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-luvora-300 to-luvora-500
                           flex items-center justify-center text-3xl shadow-md">
